@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, bindActionCreators } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Initial state for items
@@ -61,6 +61,18 @@ const allReducers = combineReducers({ items, people });
 
 // Store for current state
 const store = createStore(allReducers, composeWithDevTools());
+
+// Action creator
+const addItem = item => ({ type: "ADD_ITEM", item });
+const reset = () => ({ type: "RESET_ITEMS" });
+
+// Dispatch action object - 1st way
+store.dispatch(addItem("Pendrive"));
+
+// Action dispatcher binded with "store.dispatch" for cleaner look
+const itemActions = bindActionCreators({ add: addItem, reset }, store.dispatch);
+itemActions.add("Ruller");
+itemActions.reset();
 
 function App() {
 	return (
