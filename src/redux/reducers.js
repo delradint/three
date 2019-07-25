@@ -3,6 +3,9 @@ import itemsReducer from "./items";
 import peopleReducer from "./people";
 
 // Combined reducers
-const rootReducer = combineReducers({ itemsReducer, peopleReducer });
+const rootReducer = combineReducers({
+	items: itemsReducer,
+	people: peopleReducer
+});
 
 export default rootReducer;
